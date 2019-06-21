@@ -28,14 +28,14 @@ public class CategoryController {
         return "category/index";
     }
 
-    @RequestMapping(value = "/category/add", method = RequestMethod.GET)
+    @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddCategoryForm(Model model) {
         model.addAttribute("title", "Add Category");
         model.addAttribute(new Category());
         return "category/add";
     }
 
-    @RequestMapping(value = "/category/add", method = RequestMethod.POST)
+    @RequestMapping(value = "add", method = RequestMethod.POST)
     public String add(Model model, @ModelAttribute @Valid Category category,
                                        Errors errors) {
 
