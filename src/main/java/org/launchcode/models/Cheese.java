@@ -1,7 +1,6 @@
 package org.launchcode.models;
 
 import javax.persistence.Entity;
-import org.launchcode.models.data.CategoryDao;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -58,5 +57,9 @@ public class Cheese {
 
     public Category getCategory() {
         return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
