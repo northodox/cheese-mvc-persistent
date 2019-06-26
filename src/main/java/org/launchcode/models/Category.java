@@ -33,9 +33,18 @@ public class Category {
         this.name = name;
     }
 
+    public List<Cheese> getCheeses() {
+        return cheeses;
+    }
+
     public Category() {}
 
     public Category(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

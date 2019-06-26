@@ -21,8 +21,7 @@ public class CategoryController {
     @RequestMapping(value = "")
     public String index(Model model) {
 
-        Iterable<Category> categories = categoryDao.findAll();
-        model.addAttribute("categories");
+        model.addAttribute("categories", categoryDao.findAll());
         model.addAttribute("title", "Categories");
 
         return "category/index";
@@ -36,7 +35,7 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String add(Model model, @ModelAttribute @Valid Category category,
+    public String processAddCategoryForm(Model model, @ModelAttribute @Valid Category category,
                                        Errors errors) {
 
         if (errors.hasErrors()) {

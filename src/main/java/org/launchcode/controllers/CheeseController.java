@@ -2,6 +2,7 @@ package org.launchcode.controllers;
 
 import org.launchcode.models.Category;
 import org.launchcode.models.Cheese;
+import org.launchcode.models.Menu;
 import org.launchcode.models.data.CheeseDao;
 import org.launchcode.models.data.CategoryDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,9 +73,13 @@ public class CheeseController {
     public String processRemoveCheeseForm(@RequestParam int[] cheeseIds) {
 
         for (int cheeseId : cheeseIds) {
+            Cheese cheese = cheeseDao.findOne(cheeseId);
+
+            for(Menu menu : cheese.getMenus()) {
+                menu.removeItem(cheese);
+            }
             cheeseDao.delete(cheeseId);
         }
-
         return "redirect:";
     }
 
