@@ -19,37 +19,32 @@ import javax.validation.Valid;
 public class MenuController {
 
     @Autowired
-    private CheeseDao cheeseDao;
+    private MenuDao menuDao;
 
     @Autowired
-    private MenuDao menuDao;
+    private CheeseDao cheeseDao;
 
     @RequestMapping(value = "")
     public String index(Model model) {
-
-        Iterable<Menu> menus = menuDao.findAll();
-        model.addAttribute("menus");
         model.addAttribute("title", "Menus");
-
+        model.addAttribute("menus", menuDao.findAll());
         return "menu/index";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String displayAddMenuForm(Model model) {
+    public String add(Model model) {
         model.addAttribute("title", "Add Menu");
         model.addAttribute(new Menu());
         return "menu/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String processAddMenuForm(Model model, @ModelAttribute @Valid Menu menu,
+    public String add(Model model, @ModelAttribute @Valid Menu menu,
                       Errors errors) {
-
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Menu");
             return "menu/add";
         }
-
         menuDao.save(menu);
         return "redirect:view/" + menu.getId();
     }
